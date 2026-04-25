@@ -5,8 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Selo Verde Azul — Consultoria Ambiental Municipal</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-<!-- Biblioteca QR Code mais confiável -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html5-qrcode/2.3.8/html5-qrcode.min.js"></script>
 <style>
 :root {
   --verde: #0a6640;
@@ -21,347 +19,193 @@
   --text: #e8f5ed;
   --text2: #8bb8a0;
   --text3: #4a7a60;
-  --gold: #c9a227;
 }
-
 * { margin:0; padding:0; box-sizing:border-box; }
 html { scroll-behavior: smooth; }
-body {
-  font-family: 'DM Sans', sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  overflow-x: hidden;
-}
-
+body { font-family:'DM Sans',sans-serif; background:var(--bg); color:var(--text); overflow-x:hidden; }
 body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background:
-    radial-gradient(ellipse 80% 50% at 20% 20%, rgba(10,102,64,0.15) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 40% at 80% 80%, rgba(10,61,107,0.15) 0%, transparent 60%);
-  pointer-events: none;
-  z-index: 0;
+  content:''; position:fixed; inset:0;
+  background: radial-gradient(ellipse 80% 50% at 20% 20%,rgba(10,102,64,0.15) 0%,transparent 60%),
+              radial-gradient(ellipse 60% 40% at 80% 80%,rgba(10,61,107,0.15) 0%,transparent 60%);
+  pointer-events:none; z-index:0;
 }
-
 body::after {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background-image:
-    linear-gradient(rgba(18,135,90,0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(18,135,90,0.04) 1px, transparent 1px);
-  background-size: 60px 60px;
-  pointer-events: none;
-  z-index: 0;
+  content:''; position:fixed; inset:0;
+  background-image: linear-gradient(rgba(18,135,90,0.04) 1px,transparent 1px),
+                    linear-gradient(90deg,rgba(18,135,90,0.04) 1px,transparent 1px);
+  background-size:60px 60px; pointer-events:none; z-index:0;
 }
 
-/* NAV */
 nav {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  z-index: 100;
-  padding: 16px 40px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: rgba(5,15,10,0.85);
-  backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(18,135,90,0.15);
+  position:fixed; top:0; left:0; right:0; z-index:100;
+  padding:16px 40px; display:flex; align-items:center; justify-content:space-between;
+  background:rgba(5,15,10,0.85); backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(18,135,90,0.15);
 }
+.nav-logo { display:flex; align-items:center; gap:12px; }
+.nav-logo-icon { width:38px; height:38px; background:linear-gradient(135deg,var(--verde2),var(--azul2)); border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:20px; }
+.nav-logo-text { font-family:'Syne',sans-serif; font-weight:700; font-size:15px; line-height:1.2; }
+.nav-logo-text span { display:block; font-size:10px; font-weight:400; color:var(--text2); letter-spacing:1px; }
+.nav-links { display:flex; gap:28px; list-style:none; }
+.nav-links a { color:var(--text2); text-decoration:none; font-size:13px; font-weight:500; transition:color 0.2s; }
+.nav-links a:hover { color:var(--verde3); }
+.nav-cta { background:var(--verde2); color:white !important; padding:8px 18px; border-radius:6px; }
+.nav-cta:hover { background:var(--verde) !important; }
 
-.nav-logo { display: flex; align-items: center; gap: 12px; }
-.nav-logo-icon {
-  width: 38px; height: 38px;
-  background: linear-gradient(135deg, var(--verde2), var(--azul2));
-  border-radius: 10px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 20px;
-}
-.nav-logo-text { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 15px; line-height: 1.2; }
-.nav-logo-text span { display: block; font-size: 10px; font-weight: 400; color: var(--text2); letter-spacing: 1px; }
-
-.nav-links { display: flex; gap: 32px; list-style: none; }
-.nav-links a { color: var(--text2); text-decoration: none; font-size: 13px; font-weight: 500; letter-spacing: 0.5px; transition: color 0.2s; }
-.nav-links a:hover { color: var(--verde3); }
-.nav-cta { background: var(--verde2); color: white !important; padding: 8px 18px; border-radius: 6px; }
-.nav-cta:hover { background: var(--verde) !important; }
-
-/* HERO */
-.hero {
-  position: relative; z-index: 1;
-  min-height: 100vh;
-  display: flex; align-items: center;
-  padding: 120px 40px 80px;
-  max-width: 1200px; margin: 0 auto;
-}
-.hero-content { max-width: 640px; }
-
-.hero-badge {
-  display: inline-flex; align-items: center; gap: 8px;
-  background: rgba(18,135,90,0.12);
-  border: 1px solid rgba(18,135,90,0.3);
-  padding: 6px 14px; border-radius: 20px;
-  font-size: 12px; color: var(--verde3);
-  letter-spacing: 0.5px; margin-bottom: 28px;
-  animation: fadeUp 0.6s ease forwards;
-}
-.hero-badge::before {
-  content: ''; width: 6px; height: 6px;
-  background: var(--verde3); border-radius: 50%;
-  animation: pulse 2s infinite;
-}
+.hero { position:relative; z-index:1; min-height:100vh; display:flex; align-items:center; padding:120px 40px 80px; max-width:1200px; margin:0 auto; }
+.hero-content { max-width:640px; }
+.hero-badge { display:inline-flex; align-items:center; gap:8px; background:rgba(18,135,90,0.12); border:1px solid rgba(18,135,90,0.3); padding:6px 14px; border-radius:20px; font-size:12px; color:var(--verde3); letter-spacing:0.5px; margin-bottom:28px; animation:fadeUp 0.6s ease forwards; }
+.hero-badge::before { content:''; width:6px; height:6px; background:var(--verde3); border-radius:50%; animation:pulse 2s infinite; }
 @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
-
-.hero h1 {
-  font-family: 'Syne', sans-serif;
-  font-size: clamp(36px, 5vw, 64px);
-  font-weight: 800; line-height: 1.1;
-  margin-bottom: 24px;
-  animation: fadeUp 0.6s ease 0.1s both;
-}
-.hero h1 .highlight {
-  background: linear-gradient(135deg, var(--verde3), var(--azul3));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-.hero p {
-  font-size: 18px; color: var(--text2);
-  line-height: 1.7; margin-bottom: 40px;
-  animation: fadeUp 0.6s ease 0.2s both;
-}
-.hero-btns { display: flex; gap: 14px; flex-wrap: wrap; animation: fadeUp 0.6s ease 0.3s both; }
-
-.btn-primary {
-  background: linear-gradient(135deg, var(--verde2), var(--verde));
-  color: white; padding: 14px 28px; border-radius: 8px;
-  font-size: 15px; font-weight: 500; text-decoration: none;
-  border: none; cursor: pointer;
-  display: inline-flex; align-items: center; gap: 8px;
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(18,135,90,0.3); }
-
-.btn-secondary {
-  background: transparent; color: var(--text);
-  padding: 14px 28px; border-radius: 8px;
-  font-size: 15px; font-weight: 500; text-decoration: none;
-  border: 1px solid rgba(255,255,255,0.15); cursor: pointer;
-  transition: border-color 0.2s, background 0.2s;
-  display: inline-flex; align-items: center; gap: 8px;
-}
-.btn-secondary:hover { border-color: var(--verde3); background: rgba(18,135,90,0.08); }
-
-.hero-stats {
-  display: flex; gap: 40px;
-  margin-top: 60px; padding-top: 40px;
-  border-top: 1px solid rgba(255,255,255,0.06);
-  animation: fadeUp 0.6s ease 0.4s both;
-}
-.hero-stat-num { font-family: 'Syne', sans-serif; font-size: 32px; font-weight: 800; color: var(--verde3); }
-.hero-stat-label { font-size: 12px; color: var(--text3); letter-spacing: 0.5px; margin-top: 2px; }
-
+.hero h1 { font-family:'Syne',sans-serif; font-size:clamp(36px,5vw,64px); font-weight:800; line-height:1.1; margin-bottom:24px; animation:fadeUp 0.6s ease 0.1s both; }
+.hero h1 .highlight { background:linear-gradient(135deg,var(--verde3),var(--azul3)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.hero p { font-size:18px; color:var(--text2); line-height:1.7; margin-bottom:40px; animation:fadeUp 0.6s ease 0.2s both; }
+.hero-btns { display:flex; gap:14px; flex-wrap:wrap; animation:fadeUp 0.6s ease 0.3s both; }
+.btn-primary { background:linear-gradient(135deg,var(--verde2),var(--verde)); color:white; padding:14px 28px; border-radius:8px; font-size:15px; font-weight:500; text-decoration:none; border:none; cursor:pointer; transition:transform 0.2s,box-shadow 0.2s; display:inline-flex; align-items:center; gap:8px; }
+.btn-primary:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(18,135,90,0.3); }
+.btn-secondary { background:transparent; color:var(--text); padding:14px 28px; border-radius:8px; font-size:15px; font-weight:500; text-decoration:none; border:1px solid rgba(255,255,255,0.15); cursor:pointer; transition:border-color 0.2s,background 0.2s; display:inline-flex; align-items:center; gap:8px; }
+.btn-secondary:hover { border-color:var(--verde3); background:rgba(18,135,90,0.08); }
+.hero-stats { display:flex; gap:40px; margin-top:60px; padding-top:40px; border-top:1px solid rgba(255,255,255,0.06); animation:fadeUp 0.6s ease 0.4s both; }
+.hero-stat-num { font-family:'Syne',sans-serif; font-size:32px; font-weight:800; color:var(--verde3); }
+.hero-stat-label { font-size:12px; color:var(--text3); letter-spacing:0.5px; margin-top:2px; }
 @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
 
-/* SECTIONS */
-section { position: relative; z-index: 1; padding: 100px 40px; max-width: 1200px; margin: 0 auto; }
-.section-tag { font-size: 11px; color: var(--verde3); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; font-weight: 500; }
-.section-title { font-family: 'Syne', sans-serif; font-size: clamp(28px, 4vw, 44px); font-weight: 700; line-height: 1.2; margin-bottom: 16px; }
-.section-sub { font-size: 16px; color: var(--text2); line-height: 1.7; max-width: 560px; margin-bottom: 60px; }
+section { position:relative; z-index:1; padding:100px 40px; max-width:1200px; margin:0 auto; }
+.section-tag { font-size:11px; color:var(--verde3); letter-spacing:2px; text-transform:uppercase; margin-bottom:12px; font-weight:500; }
+.section-title { font-family:'Syne',sans-serif; font-size:clamp(28px,4vw,44px); font-weight:700; line-height:1.2; margin-bottom:16px; }
+.section-sub { font-size:16px; color:var(--text2); line-height:1.7; max-width:560px; margin-bottom:60px; }
 
-/* SERVIÇOS */
-.servicos-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
-.servico-card {
-  background: var(--bg2);
-  border: 1px solid rgba(18,135,90,0.12);
-  border-radius: 16px; padding: 32px;
-  transition: border-color 0.3s, transform 0.3s;
-  position: relative; overflow: hidden;
-}
-.servico-card::before {
-  content: ''; position: absolute;
-  top: 0; left: 0; right: 0; height: 2px;
-  background: linear-gradient(90deg, var(--verde2), var(--azul2));
-  opacity: 0; transition: opacity 0.3s;
-}
-.servico-card:hover { border-color: rgba(18,135,90,0.35); transform: translateY(-4px); }
-.servico-card:hover::before { opacity: 1; }
-.servico-icon { font-size: 32px; margin-bottom: 20px; display: block; }
-.servico-title { font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 700; margin-bottom: 10px; }
-.servico-desc { font-size: 14px; color: var(--text2); line-height: 1.6; }
+.servicos-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:20px; }
+.servico-card { background:var(--bg2); border:1px solid rgba(18,135,90,0.12); border-radius:16px; padding:32px; transition:border-color 0.3s,transform 0.3s; position:relative; overflow:hidden; }
+.servico-card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,var(--verde2),var(--azul2)); opacity:0; transition:opacity 0.3s; }
+.servico-card:hover { border-color:rgba(18,135,90,0.35); transform:translateY(-4px); }
+.servico-card:hover::before { opacity:1; }
+.servico-icon { font-size:32px; margin-bottom:20px; display:block; }
+.servico-title { font-family:'Syne',sans-serif; font-size:18px; font-weight:700; margin-bottom:10px; }
+.servico-desc { font-size:14px; color:var(--text2); line-height:1.6; }
 
-/* DIRETIVAS */
-.diretivas-section {
-  background: var(--bg2);
-  border-top: 1px solid rgba(18,135,90,0.1);
-  border-bottom: 1px solid rgba(18,135,90,0.1);
-  padding: 100px 0;
-}
-.diretivas-inner { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
-.diretivas-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
-.diretiva-pill {
-  background: var(--bg3); border: 1px solid rgba(18,135,90,0.15);
-  border-radius: 10px; padding: 16px 12px; text-align: center;
-  transition: all 0.2s;
-}
-.diretiva-pill:hover { border-color: var(--verde3); background: rgba(18,135,90,0.08); }
-.diretiva-num { font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 800; color: var(--verde3); display: block; margin-bottom: 6px; }
-.diretiva-name { font-size: 11px; color: var(--text2); line-height: 1.4; }
+/* EXPERIÊNCIA */
+.exp-grid { display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-bottom:30px; }
+.exp-card { background:var(--bg2); border:1px solid rgba(18,135,90,0.12); border-radius:16px; padding:28px; }
+.exp-destaque { border-color:rgba(18,135,90,0.35); position:relative; overflow:hidden; }
+.exp-destaque::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg,var(--verde2),var(--azul2)); }
+.exp-logo { font-size:36px; margin-bottom:12px; display:block; }
+.exp-empresa { font-family:'Syne',sans-serif; font-size:22px; font-weight:800; color:var(--verde3); margin-bottom:4px; }
+.exp-cargo { font-size:13px; font-weight:500; color:var(--text); margin-bottom:4px; }
+.exp-periodo { font-size:11px; color:var(--text3); margin-bottom:16px; letter-spacing:0.5px; }
+.exp-desc { font-size:13px; color:var(--text2); line-height:1.7; margin-bottom:16px; }
+.exp-tags { display:flex; flex-wrap:wrap; gap:6px; }
+.exp-tag { background:rgba(18,135,90,0.12); border:1px solid rgba(18,135,90,0.2); color:var(--verde3); font-size:10px; padding:3px 10px; border-radius:12px; }
+.exp-icon-sm { font-size:24px; margin-bottom:10px; display:block; }
+.exp-item-title { font-family:'Syne',sans-serif; font-size:15px; font-weight:700; margin-bottom:8px; }
+.exp-item-desc { font-size:13px; color:var(--text2); line-height:1.6; }
 
-/* PROCESSO */
-.processo-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; position: relative; }
-.processo-steps::before {
-  content: ''; position: absolute;
-  top: 28px; left: 12%; right: 12%; height: 1px;
-  background: linear-gradient(90deg, var(--verde2), var(--azul2));
-}
-.processo-step { text-align: center; padding: 0 20px; position: relative; }
-.step-num {
-  width: 56px; height: 56px;
-  background: linear-gradient(135deg, var(--verde2), var(--azul2));
-  border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 800;
-  margin: 0 auto 20px; position: relative; z-index: 1;
-}
-.step-title { font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 700; margin-bottom: 8px; }
-.step-desc { font-size: 13px; color: var(--text2); line-height: 1.6; }
+/* GRUPO EMPRESARIAL */
+.grupo-card { background:linear-gradient(135deg, rgba(18,135,90,0.1), rgba(10,61,107,0.1)); border:1px solid rgba(18,135,90,0.25); border-radius:16px; padding:28px; margin-top:20px; }
+.grupo-title { font-family:'Syne',sans-serif; font-size:18px; font-weight:700; color:var(--verde3); margin-bottom:12px; display:flex; align-items:center; gap:10px; }
+.grupo-cnpj { font-size:12px; color:var(--text3); font-family:monospace; margin-bottom:12px; }
+.grupo-desc { font-size:13px; color:var(--text2); line-height:1.6; }
 
-/* MUNICÍPIOS */
-.municipios-list { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 40px; }
-.municipio-tag {
-  background: var(--bg2); border: 1px solid rgba(18,135,90,0.2);
-  border-radius: 6px; padding: 8px 16px; font-size: 13px; color: var(--text2);
-  transition: all 0.2s;
-}
-.municipio-tag:hover { border-color: var(--verde3); color: var(--verde3); }
+.numeros-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-top:10px; }
+.numero-card { background:var(--bg2); border:1px solid rgba(18,135,90,0.12); border-radius:12px; padding:24px; text-align:center; }
+.numero-val { font-family:'Syne',sans-serif; font-size:36px; font-weight:800; color:var(--verde3); margin-bottom:6px; }
+.numero-label { font-size:11px; color:var(--text3); letter-spacing:0.5px; }
 
-/* CONTATO */
-.contato-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
-.contato-info { display: flex; flex-direction: column; gap: 20px; }
-.contato-item {
-  display: flex; align-items: center; gap: 16px;
-  padding: 20px; background: var(--bg2);
-  border: 1px solid rgba(18,135,90,0.12);
-  border-radius: 12px; text-decoration: none; color: var(--text);
-  transition: all 0.2s;
-}
-.contato-item:hover { border-color: var(--verde3); transform: translateX(4px); }
-.contato-icon {
-  width: 44px; height: 44px;
-  background: linear-gradient(135deg, var(--verde2), var(--azul2));
-  border-radius: 10px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 20px; flex-shrink: 0;
-}
-.contato-label { font-size: 11px; color: var(--text3); letter-spacing: 0.5px; margin-bottom: 3px; }
-.contato-value { font-size: 15px; font-weight: 500; }
+.diretivas-section { background:var(--bg2); border-top:1px solid rgba(18,135,90,0.1); border-bottom:1px solid rgba(18,135,90,0.1); padding:100px 0; }
+.diretivas-inner { max-width:1200px; margin:0 auto; padding:0 40px; }
+.diretivas-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:12px; }
+.diretiva-pill { background:var(--bg3); border:1px solid rgba(18,135,90,0.15); border-radius:10px; padding:16px 12px; text-align:center; transition:all 0.2s; }
+.diretiva-pill:hover { border-color:var(--verde3); background:rgba(18,135,90,0.08); }
+.diretiva-num { font-family:'Syne',sans-serif; font-size:22px; font-weight:800; color:var(--verde3); display:block; margin-bottom:6px; }
+.diretiva-name { font-size:11px; color:var(--text2); line-height:1.4; }
 
-/* QR CODE */
-.qr-container {
-  background: var(--bg2); border: 1px solid rgba(18,135,90,0.2);
-  border-radius: 16px; padding: 32px; text-align: center;
-}
-.qr-title { font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 700; margin-bottom: 6px; }
-.qr-sub { font-size: 12px; color: var(--text2); margin-bottom: 24px; }
-#qrcode { display: flex; justify-content: center; margin-bottom: 16px; min-height: 180px; }
-#qrcode canvas, #qrcode img { border-radius: 8px; padding: 12px; background: white; max-width: 100%; height: auto; }
-.qr-link { font-size: 11px; color: var(--text3); word-break: break-all; }
+.processo-steps { display:grid; grid-template-columns:repeat(4,1fr); gap:0; position:relative; }
+.processo-steps::before { content:''; position:absolute; top:28px; left:12%; right:12%; height:1px; background:linear-gradient(90deg,var(--verde2),var(--azul2)); }
+.processo-step { text-align:center; padding:0 20px; position:relative; }
+.step-num { width:56px; height:56px; background:linear-gradient(135deg,var(--verde2),var(--azul2)); border-radius:50%; display:flex; align-items:center; justify-content:center; font-family:'Syne',sans-serif; font-size:20px; font-weight:800; margin:0 auto 20px; position:relative; z-index:1; }
+.step-title { font-family:'Syne',sans-serif; font-size:15px; font-weight:700; margin-bottom:8px; }
+.step-desc { font-size:13px; color:var(--text2); line-height:1.6; }
 
-/* REDES */
-.redes-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; margin-top: 10px; }
-.rede-card {
-  background: var(--bg2); border: 1px solid rgba(255,255,255,0.06);
-  border-radius: 12px; padding: 16px; text-align: center;
-  text-decoration: none; color: var(--text); transition: all 0.2s;
-}
-.rede-card:hover { transform: translateY(-3px); border-color: rgba(18,135,90,0.3); }
-.rede-icon { font-size: 24px; margin-bottom: 8px; display: block; }
-.rede-name { font-size: 12px; font-weight: 500; margin-bottom: 2px; }
-.rede-handle { font-size: 10px; color: var(--text3); }
+.municipios-list { display:flex; flex-wrap:wrap; gap:10px; margin-top:40px; }
+.municipio-tag { background:var(--bg2); border:1px solid rgba(18,135,90,0.2); border-radius:6px; padding:8px 16px; font-size:13px; color:var(--text2); transition:all 0.2s; }
+.municipio-tag:hover { border-color:var(--verde3); color:var(--verde3); }
 
-/* FOOTER */
-footer {
-  position: relative; z-index: 1;
-  border-top: 1px solid rgba(18,135,90,0.12);
-  padding: 40px; text-align: center;
-}
-.footer-logo { font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 800; color: var(--verde3); margin-bottom: 8px; }
-.footer-sub { font-size: 12px; color: var(--text3); margin-bottom: 20px; }
-.footer-copy { font-size: 11px; color: var(--text3); }
+.contato-grid { display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:start; }
+.contato-info { display:flex; flex-direction:column; gap:20px; }
+.contato-item { display:flex; align-items:center; gap:16px; padding:20px; background:var(--bg2); border:1px solid rgba(18,135,90,0.12); border-radius:12px; text-decoration:none; color:var(--text); transition:all 0.2s; }
+.contato-item:hover { border-color:var(--verde3); transform:translateX(4px); }
+.contato-icon { width:44px; height:44px; background:linear-gradient(135deg,var(--verde2),var(--azul2)); border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:20px; flex-shrink:0; }
+.contato-label { font-size:11px; color:var(--text3); letter-spacing:0.5px; margin-bottom:3px; }
+.contato-value { font-size:15px; font-weight:500; }
 
-.divider {
-  position: relative; z-index: 1; height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(18,135,90,0.3), transparent);
-  margin: 0 40px;
-}
+.qr-container { background:var(--bg2); border:1px solid rgba(18,135,90,0.2); border-radius:16px; padding:32px; text-align:center; }
+.qr-title { font-family:'Syne',sans-serif; font-size:16px; font-weight:700; margin-bottom:6px; }
+.qr-sub { font-size:12px; color:var(--text2); margin-bottom:24px; }
+#qrcode { display:flex; justify-content:center; margin-bottom:16px; min-height:180px; }
+#qrcode img { border-radius:8px; padding:12px; background:white; }
+.qr-link { font-size:11px; color:var(--text3); word-break:break-all; }
 
-@media (max-width: 768px) {
-  nav { padding: 14px 20px; }
-  .nav-links { display: none; }
-  .hero { padding: 100px 20px 60px; }
-  .hero-stats { gap: 24px; flex-wrap: wrap; }
-  section { padding: 60px 20px; }
-  .diretivas-grid { grid-template-columns: repeat(2, 1fr); }
-  .processo-steps { grid-template-columns: 1fr 1fr; gap: 30px; }
-  .processo-steps::before { display: none; }
-  .contato-grid { grid-template-columns: 1fr; gap: 30px; }
-  .redes-grid { grid-template-columns: repeat(2, 1fr); }
-  .servicos-grid { grid-template-columns: 1fr; }
+.redes-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-top:10px; }
+.rede-card { background:var(--bg2); border:1px solid rgba(255,255,255,0.06); border-radius:12px; padding:16px; text-align:center; text-decoration:none; color:var(--text); transition:all 0.2s; }
+.rede-card:hover { transform:translateY(-3px); border-color:rgba(18,135,90,0.3); }
+.rede-icon { font-size:24px; margin-bottom:8px; display:block; }
+.rede-name { font-size:12px; font-weight:500; margin-bottom:2px; }
+.rede-handle { font-size:10px; color:var(--text3); }
+
+footer { position:relative; z-index:1; border-top:1px solid rgba(18,135,90,0.12); padding:40px; text-align:center; }
+.footer-logo { font-family:'Syne',sans-serif; font-size:20px; font-weight:800; color:var(--verde3); margin-bottom:8px; }
+.footer-sub { font-size:12px; color:var(--text3); margin-bottom:20px; }
+.footer-copy { font-size:11px; color:var(--text3); }
+
+.divider { position:relative; z-index:1; height:1px; background:linear-gradient(90deg,transparent,rgba(18,135,90,0.3),transparent); margin:0 40px; }
+
+@media (max-width:768px) {
+  nav { padding:14px 20px; }
+  .nav-links { display:none; }
+  .hero { padding:100px 20px 60px; }
+  .hero-stats { gap:24px; flex-wrap:wrap; }
+  section { padding:60px 20px; }
+  .diretivas-grid { grid-template-columns:repeat(2,1fr); }
+  .processo-steps { grid-template-columns:1fr 1fr; gap:30px; }
+  .processo-steps::before { display:none; }
+  .contato-grid { grid-template-columns:1fr; gap:30px; }
+  .redes-grid { grid-template-columns:repeat(2,1fr); }
+  .servicos-grid { grid-template-columns:1fr; }
+  .exp-grid { grid-template-columns:1fr; }
+  .numeros-grid { grid-template-columns:repeat(2,1fr); }
 }
 </style>
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
   <div class="nav-logo">
     <div class="nav-logo-icon">🌿</div>
-    <div class="nav-logo-text">
-      Selo Verde Azul
-      <span>CONSULTORIA AMBIENTAL</span>
-    </div>
+    <div class="nav-logo-text">Selo Verde Azul<span>CONSULTORIA AMBIENTAL</span></div>
   </div>
   <ul class="nav-links">
     <li><a href="#servicos">Serviços</a></li>
+    <li><a href="#experiencia">Quem Somos</a></li>
     <li><a href="#processo">Como funciona</a></li>
     <li><a href="#municipios">Municípios</a></li>
     <li><a href="#contato" class="nav-cta">Fale conosco</a></li>
   </ul>
 </nav>
 
-<!-- HERO -->
 <div style="position:relative;z-index:1;">
 <div class="hero">
   <div class="hero-content">
     <div class="hero-badge">● Especialistas no Programa Município VerdeAzul</div>
-    <h1>
-      Transformamos municípios em<br>
-      <span class="highlight">referências ambientais</span>
-    </h1>
-    <p>
-      Consultoria especializada no Selo VerdeAzul, diagnóstico municipal automatizado por IA,
-      captação de recursos estaduais e federais, AVCB e Plansan para municípios de
-      todo o Estado de São Paulo.
-    </p>
+    <h1>Transformamos municípios em<br><span class="highlight">referências ambientais</span></h1>
+    <p>Consultoria especializada no Selo VerdeAzul, diagnóstico municipal automatizado por IA, captação de recursos estaduais e federais, AVCB e Plansan para municípios de todo o Estado de São Paulo.</p>
     <div class="hero-btns">
       <a href="https://wa.me/5512991683820" target="_blank" class="btn-primary">📱 Fale pelo WhatsApp</a>
       <a href="#servicos" class="btn-secondary">Nossos serviços →</a>
     </div>
     <div class="hero-stats">
-      <div>
-        <div class="hero-stat-num">19</div>
-        <div class="hero-stat-label">MUNICÍPIOS NA REGIÃO</div>
-      </div>
-      <div>
-        <div class="hero-stat-num">10</div>
-        <div class="hero-stat-label">DIRETIVAS ANALISADAS</div>
-      </div>
-      <div>
-        <div class="hero-stat-num">IA</div>
-        <div class="hero-stat-label">DIAGNÓSTICO AUTOMÁTICO</div>
-      </div>
+      <div><div class="hero-stat-num">41</div><div class="hero-stat-label">ANOS DE EXPERIÊNCIA</div></div>
+      <div><div class="hero-stat-num">19</div><div class="hero-stat-label">MUNICÍPIOS NA REGIÃO</div></div>
+      <div><div class="hero-stat-num">IA</div><div class="hero-stat-label">DIAGNÓSTICO AUTOMÁTICO</div></div>
     </div>
   </div>
 </div>
@@ -373,34 +217,75 @@ footer {
 <section id="servicos">
   <div class="section-tag">O que fazemos</div>
   <h2 class="section-title">Soluções completas para<br>gestão ambiental municipal</h2>
-  <p class="section-sub">Da análise documental à captação de recursos — cuidamos de todo o processo para seu município conquistar o Selo VerdeAzul e se desenvolver.</p>
-
+  <p class="section-sub">Da análise documental à captação de recursos — cuidamos de todo o processo para seu município conquistar o Selo VerdeAzul.</p>
   <div class="servicos-grid">
-    <div class="servico-card">
-      <span class="servico-icon">🏅</span>
-      <div class="servico-title">Consultoria PMVA</div>
-      <p class="servico-desc">Assessoria completa no Programa Município VerdeAzul com análise das 10 diretivas e estratégias para certificação.</p>
+    <div class="servico-card"><span class="servico-icon">🏅</span><div class="servico-title">Consultoria PMVA</div><p class="servico-desc">Assessoria completa no Programa Município VerdeAzul com análise das 10 diretivas e estratégias para certificação.</p></div>
+    <div class="servico-card"><span class="servico-icon">🤖</span><div class="servico-title">Diagnóstico com IA</div><p class="servico-desc">Sistema de Inteligência Artificial que analisa os documentos do município e gera diagnóstico técnico automatizado com pontuação e recomendações.</p></div>
+    <div class="servico-card"><span class="servico-icon">💰</span><div class="servico-title">Captação de Recursos</div><p class="servico-desc">Identificação e elaboração de projetos para editais estaduais e federais: FUNASA, BNDES, MMA, SABESP e outros.</p></div>
+    <div class="servico-card"><span class="servico-icon">📋</span><div class="servico-title">Elaboração de Plansan</div><p class="servico-desc">Plano Municipal de Saneamento Básico conforme Lei 14.026/2020, com metas e indicadores para universalização dos serviços.</p></div>
+    <div class="servico-card"><span class="servico-icon">🔥</span><div class="servico-title">AVCB</div><p class="servico-desc">Auto de Vistoria do Corpo de Bombeiros — assessoria completa para obtenção e renovação do AVCB em edificações municipais e comerciais.</p></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- QUEM SOMOS - EXPERIÊNCIA -->
+<section id="experiencia">
+  <div class="section-tag">Quem somos</div>
+  <h2 class="section-title">Experiência que<br><span style="background:linear-gradient(135deg,#1db874,#3d9be8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">faz a diferença</span></h2>
+  <p class="section-sub">Fundador com mais de 40 anos de experiência na Sabesp, aliando conhecimento técnico e vivência operacional para apoiar municípios na gestão ambiental.</p>
+
+  <div class="exp-grid">
+    <div class="exp-card exp-destaque">
+      <span class="exp-logo">💧</span>
+      <div class="exp-empresa">Fundador</div>
+      <div class="exp-cargo">41 anos de experiência na Sabesp</div>
+      <div class="exp-periodo">Sólida atuação em saneamento básico e gestão ambiental</div>
+      <p class="exp-desc">Fundador com 41 anos de experiência na Sabesp, com sólida atuação em saneamento básico e gestão ambiental, reunindo conhecimento técnico e experiência prática para apoiar municípios na implementação de políticas ambientais e captação de recursos. Responsável pelos sistemas de tratamento de água e esgoto em toda a região do Vale do Paraíba, abrangendo os municípios de Pindamonhangaba até Bananal. Amplo conhecimento técnico, operacional e burocrático de todos os sistemas da região.</p>
+      <div class="exp-tags">
+        <span class="exp-tag">Tratamento de Água</span>
+        <span class="exp-tag">Esgotamento Sanitário</span>
+        <span class="exp-tag">Operação de Sistemas</span>
+        <span class="exp-tag">Selo VerdeAzul</span>
+        <span class="exp-tag">CETESB</span>
+        <span class="exp-tag">Vale do Paraíba</span>
+        <span class="exp-tag">41 anos SABESP</span>
+      </div>
     </div>
-    <div class="servico-card">
-      <span class="servico-icon">🤖</span>
-      <div class="servico-title">Diagnóstico com IA</div>
-      <p class="servico-desc">Sistema de Inteligência Artificial que analisa os documentos do município e gera diagnóstico técnico automatizado com pontuação e recomendações.</p>
+
+    <div style="display:flex;flex-direction:column;gap:16px;">
+      <div class="exp-card">
+        <span class="exp-icon-sm">🏅</span>
+        <div class="exp-item-title">Programa Município VerdeAzul</div>
+        <p class="exp-item-desc">Responsável por toda a parte burocrática e documental relacionada ao Programa Município VerdeAzul (PMVA) durante atuação na SABESP — com profundo conhecimento dos critérios de avaliação, indicadores e documentação exigida para cada diretiva.</p>
+      </div>
+      <div class="exp-card">
+        <span class="exp-icon-sm">🗺️</span>
+        <div class="exp-item-title">Conhecimento regional único</div>
+        <p class="exp-item-desc">Conhecimento aprofundado dos sistemas de saneamento de todos os municípios entre Pindamonhangaba e Bananal — infraestrutura, capacidade, pontos críticos e oportunidades de melhoria de cada cidade da região.</p>
+      </div>
+      <div class="exp-card">
+        <span class="exp-icon-sm">📋</span>
+        <div class="exp-item-title">Expertise técnica e burocrática</div>
+        <p class="exp-item-desc">Domínio completo dos processos técnicos e burocráticos do setor: laudos de qualidade da água, outorgas, relatórios de desempenho, ICTEM, IQT e documentação para certificações ambientais municipais.</p>
+      </div>
     </div>
-    <div class="servico-card">
-      <span class="servico-icon">💰</span>
-      <div class="servico-title">Captação de Recursos</div>
-      <p class="servico-desc">Identificação e elaboração de projetos para editais estaduais e federais: FUNASA, BNDES, MMA, SABESP e outros.</p>
+  </div>
+
+  <!-- GRUPO EMPRESARIAL -->
+  <div class="grupo-card">
+    <div class="grupo-title">
+      <span>🏢</span> Uma empresa da União do Vale Paisagismo Ltda
     </div>
-    <div class="servico-card">
-      <span class="servico-icon">📋</span>
-      <div class="servico-title">Elaboração de Plansan</div>
-      <p class="servico-desc">Plano Municipal de Saneamento Básico conforme Lei 14.026/2020, com metas e indicadores para universalização dos serviços.</p>
-    </div>
-    <div class="servico-card">
-      <span class="servico-icon">🔥</span>
-      <div class="servico-title">AVCB</div>
-      <p class="servico-desc">Auto de Vistoria do Corpo de Bombeiros — assessoria completa para obtenção e renovação do AVCB em edificações municipais e comerciais.</p>
-    </div>
+    <div class="grupo-cnpj">CNPJ: 18.341.291/0001-47</div>
+    <p class="grupo-desc">Com ampla atuação em conservação de áreas verdes, obras, manutenção em sistemas de tratamento de água e esgotos. A experiência no setor de saneamento aliada à capacidade operacional em serviços de paisagismo e manutenção nos permite oferecer soluções integradas e completas para os municípios, desde a gestão ambiental até a execução de serviços especializados.</p>
+  </div>
+
+  <div class="numeros-grid">
+    <div class="numero-card"><div class="numero-val">41</div><div class="numero-label">Anos na SABESP</div></div>
+    <div class="numero-card"><div class="numero-val">19+</div><div class="numero-label">Municípios conhecidos</div></div>
+    <div class="numero-card"><div class="numero-val">10</div><div class="numero-label">Diretivas dominadas</div></div>
+    <div class="numero-card"><div class="numero-val">IA</div><div class="numero-label">Tecnologia própria</div></div>
   </div>
 </section>
 
@@ -411,7 +296,7 @@ footer {
   <div class="diretivas-inner">
     <div class="section-tag">Programa Município VerdeAzul</div>
     <h2 class="section-title">Avaliamos as 10 diretivas do PMVA</h2>
-    <p class="section-sub">Analisamos cada diretiva com base nos documentos oficiais do município e geramos um relatório técnico completo com pontuação e recomendações.</p>
+    <p class="section-sub">Analisamos cada diretiva com base nos documentos oficiais do município e geramos um relatório técnico completo.</p>
     <div class="diretivas-grid">
       <div class="diretiva-pill"><span class="diretiva-num">01</span><div class="diretiva-name">Arborização Urbana</div></div>
       <div class="diretiva-pill"><span class="diretiva-num">02</span><div class="diretiva-name">Esgoto Tratado</div></div>
@@ -434,28 +319,11 @@ footer {
   <div class="section-tag">Metodologia</div>
   <h2 class="section-title">Como funciona</h2>
   <p class="section-sub">Processo simples e eficiente — do levantamento documental ao relatório final em poucos dias.</p>
-
   <div class="processo-steps">
-    <div class="processo-step">
-      <div class="step-num">1</div>
-      <div class="step-title">Levantamento</div>
-      <p class="step-desc">Coletamos todos os documentos oficiais do município: Plansan, legislação, planos setoriais e manuais.</p>
-    </div>
-    <div class="processo-step">
-      <div class="step-num">2</div>
-      <div class="step-title">Diagnóstico IA</div>
-      <p class="step-desc">Nossa IA analisa os documentos e avalia cada diretiva com nota e justificativa técnica baseada nos documentos.</p>
-    </div>
-    <div class="processo-step">
-      <div class="step-num">3</div>
-      <div class="step-title">Relatório</div>
-      <p class="step-desc">Geramos relatório técnico completo com pontuação, lacunas e recomendações prioritárias para o município.</p>
-    </div>
-    <div class="processo-step">
-      <div class="step-num">4</div>
-      <div class="step-title">Recursos</div>
-      <p class="step-desc">Identificamos editais compatíveis e elaboramos projetos para captação de recursos estaduais e federais.</p>
-    </div>
+    <div class="processo-step"><div class="step-num">1</div><div class="step-title">Levantamento</div><p class="step-desc">Coletamos todos os documentos oficiais do município: Plansan, legislação, planos setoriais e manuais.</p></div>
+    <div class="processo-step"><div class="step-num">2</div><div class="step-title">Diagnóstico IA</div><p class="step-desc">Nossa IA analisa os documentos e avalia cada diretiva com nota e justificativa técnica baseada nos documentos.</p></div>
+    <div class="processo-step"><div class="step-num">3</div><div class="step-title">Relatório</div><p class="step-desc">Geramos relatório técnico completo com pontuação, lacunas e recomendações prioritárias para o município.</p></div>
+    <div class="processo-step"><div class="step-num">4</div><div class="step-title">Recursos</div><p class="step-desc">Identificamos editais compatíveis e elaboramos projetos para captação de recursos estaduais e federais.</p></div>
   </div>
 </section>
 
@@ -466,7 +334,6 @@ footer {
   <div class="section-tag">Área de atuação</div>
   <h2 class="section-title">Municípios que podemos atender</h2>
   <p class="section-sub">Estamos prontos para atender municípios do Vale do Paraíba e região Serrana do Estado de São Paulo.</p>
-
   <div class="municipios-list">
     <div class="municipio-tag">Roseira</div>
     <div class="municipio-tag">Cunha</div>
@@ -499,63 +366,39 @@ footer {
   <div class="section-tag">Fale conosco</div>
   <h2 class="section-title">Entre em contato</h2>
   <p class="section-sub">Pronto para conquistar o Selo VerdeAzul ou regularizar o AVCB? Entre em contato e agende uma conversa.</p>
-
   <div class="contato-grid">
     <div class="contato-info">
-
       <a href="https://wa.me/5512991683820" target="_blank" class="contato-item">
         <div class="contato-icon">📱</div>
-        <div>
-          <div class="contato-label">WHATSAPP</div>
-          <div class="contato-value">(12) 99168-3820</div>
-        </div>
+        <div><div class="contato-label">WHATSAPP</div><div class="contato-value">(12) 99168-3820</div></div>
       </a>
-
       <a href="mailto:haroldpafilho@gmail.com" class="contato-item">
         <div class="contato-icon">✉️</div>
-        <div>
-          <div class="contato-label">E-MAIL</div>
-          <div class="contato-value">haroldpafilho@gmail.com</div>
-        </div>
+        <div><div class="contato-label">E-MAIL</div><div class="contato-value">haroldpafilho@gmail.com</div></div>
       </a>
-
       <div class="contato-item" style="cursor:default;">
         <div class="contato-icon">📍</div>
-        <div>
-          <div class="contato-label">ÁREA DE ATUAÇÃO</div>
-          <div class="contato-value">Todo o Estado de São Paulo</div>
-        </div>
+        <div><div class="contato-label">ÁREA DE ATUAÇÃO</div><div class="contato-value">Todo o Estado de São Paulo</div></div>
       </div>
-
       <div style="margin-top:4px;">
         <div class="section-tag" style="margin-bottom:12px;">Redes sociais</div>
         <div class="redes-grid">
-          <a href="#" class="rede-card">
-            <span class="rede-icon">📸</span>
-            <div class="rede-name">Instagram</div>
-            <div class="rede-handle">@seloverdeazul</div>
+          <a href="https://www.instagram.com/atendimento.seloverdeazul" target="_blank" class="rede-card">
+            <span class="rede-icon">📸</span><div class="rede-name">Instagram</div><div class="rede-handle">@atendimento.seloverdeazul</div>
           </a>
           <a href="#" class="rede-card">
-            <span class="rede-icon">💼</span>
-            <div class="rede-name">LinkedIn</div>
-            <div class="rede-handle">Selo Verde Azul</div>
+            <span class="rede-icon">💼</span><div class="rede-name">LinkedIn</div><div class="rede-handle">Selo Verde Azul</div>
           </a>
-          <a href="#" class="rede-card">
-            <span class="rede-icon">👥</span>
-            <div class="rede-name">Facebook</div>
-            <div class="rede-handle">Selo Verde Azul</div>
+          <a href="http://www.facebook.com/profile.php?id=61578322270203" target="_blank" class="rede-card">
+            <span class="rede-icon">👥</span><div class="rede-name">Facebook</div><div class="rede-handle">Selo Verde Azul</div>
           </a>
           <a href="https://wa.me/5512991683820" target="_blank" class="rede-card">
-            <span class="rede-icon">💬</span>
-            <div class="rede-name">WhatsApp</div>
-            <div class="rede-handle">(12) 99168-3820</div>
+            <span class="rede-icon">💬</span><div class="rede-name">WhatsApp</div><div class="rede-handle">(12) 99168-3820</div>
           </a>
         </div>
       </div>
-
     </div>
 
-    <!-- QR CODE - VERSÃO MANUAL COM CANVAS -->
     <div class="qr-container">
       <div class="qr-title">🌿 Acesse pelo celular</div>
       <p class="qr-sub">Escaneie o QR Code para falar conosco no WhatsApp</p>
@@ -571,7 +414,6 @@ footer {
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
   <div class="footer-logo">🌿 Selo Verde Azul</div>
   <div class="footer-sub">Consultoria Ambiental Municipal — Estado de São Paulo</div>
@@ -579,56 +421,23 @@ footer {
 </footer>
 
 <script>
-// Função para gerar QR Code manualmente usando canvas
-function gerarQRCode() {
-  var container = document.getElementById("qrcode");
-  if (!container) return;
-  
-  // Limpa o container
-  container.innerHTML = "";
-  
-  // URL para o QR Code
+document.addEventListener("DOMContentLoaded", function() {
   var url = "https://wa.me/5512991683820?text=Olá! Gostaria de saber mais sobre os serviços da Selo Verde Azul Consultoria Ambiental.";
-  
-  // Cria um elemento canvas
-  var canvas = document.createElement("canvas");
-  canvas.width = 180;
-  canvas.height = 180;
-  container.appendChild(canvas);
-  
-  // Usa a API nativa para gerar QR Code
-  // Fonte: https://api.qrserver.com
   var img = document.createElement("img");
   img.src = "https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=" + encodeURIComponent(url) + "&color=0a6640&bgcolor=ffffff";
-  img.style.width = "180px";
-  img.style.height = "180px";
-  img.style.borderRadius = "8px";
-  img.style.padding = "12px";
-  img.style.backgroundColor = "white";
-  
-  container.innerHTML = "";
-  container.appendChild(img);
-}
-
-// Executa quando a página carregar
-document.addEventListener("DOMContentLoaded", function() {
-  gerarQRCode();
+  img.style.cssText = "width:180px;height:180px;border-radius:8px;padding:12px;background:white;";
+  document.getElementById("qrcode").appendChild(img);
 });
 
-// Animações de fade-in ao rolar a página
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(e => {
-    if (e.isIntersecting) {
-      e.target.style.opacity = '1';
-      e.target.style.transform = 'translateY(0)';
-    }
+    if (e.isIntersecting) { e.target.style.opacity='1'; e.target.style.transform='translateY(0)'; }
   });
 }, { threshold: 0.1 });
 
-document.querySelectorAll('.servico-card, .diretiva-pill, .processo-step, .municipio-tag, .contato-item, .rede-card').forEach(el => {
-  el.style.opacity = '0';
-  el.style.transform = 'translateY(20px)';
-  el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+document.querySelectorAll('.servico-card,.diretiva-pill,.processo-step,.municipio-tag,.contato-item,.rede-card,.exp-card,.numero-card,.grupo-card').forEach(el => {
+  el.style.opacity='0'; el.style.transform='translateY(20px)';
+  el.style.transition='opacity 0.5s ease, transform 0.5s ease';
   observer.observe(el);
 });
 </script>
